@@ -1,0 +1,24 @@
+<section data-ng-controller="CustomersController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Customers</h1>
+    </div>
+	<input type="text"  data-ng-model="searchText" class="form-control" placeholder="Digite nome para busca">
+	<br />
+    <div class="list-group">
+        <a data-ng-repeat="customer in customers | filter:searchText" data-ng-href="#!/customers/{{customer._id}}" class="list-group-item">
+			<p>{{ customer.firstName }} </p>
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="customer.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="customer.user.displayName"></span>
+			</small>
+        </a>
+
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!customers.$resolved || customers.length">
+    	No Customers yet, why don't you <a href="/#!/customers/create">create one</a>?
+    </div>
+
+
+</section>
